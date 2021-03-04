@@ -39,13 +39,15 @@
             p.posicao = pos;
         }
 
-        public bool posicaoValida(Posicao pos)
+        public Peca retirarPeca (Posicao pos)
         {
-            if(pos.linha<0 || pos.linha>linhas || pos.coluna<0 || pos.coluna > colunas)
+            if(peca(pos) == null)
             {
-                return false;
-            }
-            return true;
+                return null;
+            }Peca aux = peca(pos);
+            aux.posicao = null;
+            pecas[pos.linha, pos.coluna] = null;
+            return aux;
         }
 
         public void validarPosicao(Posicao pos)
@@ -54,6 +56,15 @@
             {
                 throw new TabuleiroException("Posicao Invalida!");
             }
+        }
+
+        public bool posicaoValida(Posicao pos)
+        {
+            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
